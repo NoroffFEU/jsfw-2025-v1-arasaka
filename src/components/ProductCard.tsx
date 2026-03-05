@@ -1,60 +1,71 @@
 import { Link } from 'react-router-dom';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
+
 import type { Product } from '../types/product';
 import { formatMoney } from '../utils/money';
 import { getDiscountPercent } from '../utils/discount';
+import { useCartStore } from '../store/cartStore';
 
-export default function ProductCard({ product }: { product: Product }) {
-	const discount = getDiscountPercent(product.price, product.discountedPrice);
+export default function ProductCard({ p }: { p: Product }) {
+	const discount = getDiscountPercent(p.price, p.discountedPrice);
+	const hasDiscount = discount > 0;
+
+	const addItem = useCartStore(s => s.addItem);
+
+	function onAddToCart(e: React.MouseEvent) {
+		e.preventDefault(); 
+		e.stopPropagation();
+
+		addItem(p);
+		toast('Added to cart');
+	}
 
 	return (
-		<div
-			style={{
-				border: '1px solid #ccc',
-				padding: '12px',
-				marginBottom: '12px',
-				maxWidth: '300px',
-			}}>
-			<div style={{ position: 'relative' }}>
-				{product.image?.url && (
-					<img
-						src={product.image.url}
-						alt={product.image.alt ?? product.title}
-						style={{ width: '100%', height: '200px', objectFit: 'cover' }}
-					/>
-				)}
+		<Link
+			to={`/product/${p.id}`}
+			className='block no-underline'>
+			<Card className='overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5'>
+				<div className='relative'>
+					<div className='aspect-4/3 bg-muted'>
+						<img
+							src={p.image?.url}
+							alt={p.image?.alt ?? p.title}
+							className='object-cover w-full h-full'
+							loading='lazy'
+						/>
+					</div>
 
-				{discount > 0 && (
-					<span
-						style={{
-							position: 'absolute',
-							top: 8,
-							left: 8,
-							background: 'black',
-							color: 'white',
-							padding: '2px 8px',
-							fontSize: 12,
-						}}>
-						-{discount}%
-					</span>
-				)}
-			</div>
+					{hasDiscount && <Badge className='absolute left-3 top-3'>-{discount}%</Badge>}
+				</div>
 
-			<h3>
-				<Link to={`/product/${product.id}`}>{product.title}</Link>
-			</h3>
+				<CardContent className='p-4 space-y-3'>
+					<div className='space-y-1'>
+						<h3 className='font-semibold leading-snug line-clamp-1'>{p.title}</h3>
 
-			<p>
-				{discount > 0 ? (
-					<>
-						<strong>{formatMoney(product.discountedPrice)}</strong>{' '}
-						<span style={{ textDecoration: 'line-through', color: '#666' }}>{formatMoney(product.price)}</span>
-					</>
-				) : (
-					<strong>{formatMoney(product.price)}</strong>
-				)}
-			</p>
+						<div className='flex items-baseline gap-2'>
+							{hasDiscount ? (
+								<>
+									<span className='font-semibold'>{formatMoney(p.discountedPrice)}</span>
+									<span className='text-sm line-through text-muted-foreground'>{formatMoney(p.price)}</span>
+								</>
+							) : (
+								<span className='font-semibold'>{formatMoney(p.price)}</span>
+							)}
+						</div>
 
-			<p>Rating: {product.rating}/5</p>
-		</div>
+						<p className='text-sm text-muted-foreground'>Rating: {p.rating}/5</p>
+					</div>
+
+					<Button
+						className='w-full'
+						onClick={onAddToCart}>
+						Add to cart
+					</Button>
+				</CardContent>
+			</Card>
+		</Link>
 	);
 }
