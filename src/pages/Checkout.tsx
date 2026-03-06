@@ -60,7 +60,7 @@ export default function Checkout() {
 	return (
 		<div className='max-w-md space-y-6'>
 			<h1 className='text-2xl font-semibold'>Checkout</h1>
-			<p className='text-sm text-muted-foreground'>Total: ${totalPrice().toFixed(2)}</p>
+			<p className='text-sm text-muted-foreground'>Total: NOK{totalPrice().toFixed(2)}</p>
 
 			<form
 				onSubmit={onSubmit}

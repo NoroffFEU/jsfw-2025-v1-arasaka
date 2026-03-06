@@ -1,73 +1,83 @@
-# React + TypeScript + Vite
+# React Online Shop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a simple online shop built with React and TypeScript.  
+The application allows users to browse products, view product details, search and sort items, add products to a cart, and simulate a checkout process.
 
-Currently, two official plugins are available:
+The goal of this assignment was to practice working with a modern JavaScript framework and build a functional digital solution using real API data.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Browse products from the Noroff Online Shop API
+- View detailed product pages
+- Search products
+- Sort products by price or rating
+- Add and remove items from the cart
+- Change product quantity in the cart
+- Checkout page with simulated payment
+- Success page after checkout
+- Contact form with validation
+- Toast notifications for user feedback
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Technologies Used
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React
+- TypeScript
+- Vite
+- React Router
+- TanStack React Query
+- Zustand (cart state management)
+- Tailwind CSS
+- shadcn/ui components
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Installation
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Clone the repository:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+git clone [https://github.com/NoroffFEU/jsfw-2025-v1-arasaka]
+
+
+Install:
+
+
+npm install
+
+
+Run the development server:
+
+
+npm run dev
+
+
+---
+
+## Live Site
+
+Live site:  
+[https://reactonlineshoparasaka.netlify.app/]
+
+---
+
+## API
+
+This project uses the Noroff Online Shop API:
+
+[https://docs.noroff.dev/docs/v2/basic/online-shop]
+
+---
+
+## AI Usage
+
+AI was used only for learning support, debugging explanations, and development guidance.  
+All final code was reviewed and understood before being included in the project.
+
+See **AI_LOG.md** for more details.
+
+---
+
